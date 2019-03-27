@@ -18,3 +18,9 @@ Un exemple :
 * Faire une analyse des sentiments sur la corrélation des tweets générés par les lycéens au USA concernant les armes/menace et les fusillades serait très intéressant pour le gouvernement pour prédire des futurs incidents
 * Pour cela, on doit choisir très minutieusement les mots clés, hashtag, etc. généré par les utilisateur de twitter et la population visée.
 Une fois les données récupérées, on peut faire nettoyage de données (texte mining) via le nuage de mot (stowords, stemming,etc.) afin connaitre les termes qui reviennent le plus, mais aussi les mots clefs, ensuite utiliser ma base elastic pour préparer ma données (via search, agrégats) et enfin créer une visualisation avec Kibana + D3js (ou équivalent) pour faire comprendre l’utilité de ma solution aux opérationnelles.
+
+## Notre idée :
+
+Analyser le nombre de tweets concernant le jeu World of Warcraft en fonction du temps et prédire le moment idéal pour que Blizzard sorte un contenu (News, Patch, évènement ...), dans le but de maintenir sa communauté active.
+
+![Horde](https://i.ibb.co/b3qxfTj/horde-small.jpg)
