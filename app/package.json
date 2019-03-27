@@ -12,7 +12,6 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
-    "node-sass": "^4.11.0",
     "nodemon": "^1.18.10",
     "pug": "^2.0.3",
     "sass": "^1.17.3"
