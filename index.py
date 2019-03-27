@@ -10,7 +10,7 @@ import json
 # MONGO_HOST = 'mongodb://localhost/twitterdb'  # assuming you have mongoDB installed locally
 # and a database called 'twitterdb'
 
-WORDS = ['#blizzard', '#wow', '#warcraft']
+WORDS = ['#WarcraftQA']
 
 CONSUMER_KEY = os.getenv('CONSUMER_KEY')
 CONSUMER_SECRET = os.getenv('CONSUMER_SECRET')
@@ -61,4 +61,4 @@ auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 listener = StreamListener(api=tweepy.API(wait_on_rate_limit=True))
 streamer = tweepy.Stream(auth=auth, listener=listener)
 print("Tracking: " + str(WORDS))
-streamer.filter(track=WORDS)
+streamer.filter(languages=["en"], track=WORDS)
