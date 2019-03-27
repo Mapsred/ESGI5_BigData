@@ -21,6 +21,7 @@ Une fois les données récupérées, on peut faire nettoyage de données (t
 
 ## Notre idée :
 
-Analyser le nombre de tweets concernant le jeu World of Warcraft en fonction du temps et prédire le moment idéal pour que Blizzard sorte un contenu (News, Patch, évènement ...), dans le but de maintenir sa communauté active.
+On va se baser sur le hashtag #WarcraftQA, qui est un hashtag permettant à la communauté du jeu World of Warcraft, de poser des questions directement aux développeurs. Ces derniers répondent ensuite à la communauté par vidéo.
+L'idée sera d'extraire les tweets Anglais comprenant #WarcraftQA, et de categoriser les mots pour visualiser les thèmes des différentes questions.
 
 ![Horde](https://i.ibb.co/b3qxfTj/horde-small.jpg)
