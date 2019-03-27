@@ -1,5 +1,56 @@
 h1 {
-  color: blue;
+  color: #202052;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #e3e7f1;
+}
+
+nav {
+  padding: 0 25%;
+  height: 65px;
+  background-color: #494ca2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+nav .topic {
+  width: 50%;
+}
+nav .topic h2 {
+  color: #c6cbef;
+}
+nav .links {
+  width: 50%;
+}
+nav .links ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+}
+nav .links ul li {
+  margin: 0 15px;
+}
+nav .links ul a {
+  color: #c6cbef;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+nav .links ul a:hover {
+  color: #ffffff;
+}
+nav .links ul a:active {
+  color: #c6cbef;
+}
+
+section {
+  padding: 0 25%;
 }
 
 /*# sourceMappingURL=style.css.map */
