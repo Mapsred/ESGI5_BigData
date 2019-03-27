@@ -1,9 +1,12 @@
 from __future__ import print_function
 
 import os
+import json
 
 import tweepy
 import datetime
+
+import requests
 
 WORDS = ['#WarcraftQA']
 
@@ -29,8 +32,32 @@ cursor = tweepy.Cursor(
     until=today
 )
 
+bulk = ""
+total = 0
+
 for tweet in cursor.items():
     # tweepy.models.Status
     data = tweet._json
-    print(data)
-    exit()
+    data = data["retweeted_status"] if "retweeted_status" in data else data
+    dataline = {
+        'text': data['text'],
+        'entities': data['entities'],
+        'user': data['user']
+    }
+
+    bulk += json.dumps({'index': {'_id': data['id']}})
+    bulk += "\n"
+    bulk += json.dumps(dataline)
+    bulk += "\n"
+    total += 1
+
+print(f"Total : {total} tweets")
+
+requests.delete("http://elasticsearch:9200/tweets")
+
+response = requests.post("http://elasticsearch:9200/tweets/_doc/_bulk", data=bulk, headers={
+    'Content-Type': 'application/json',
+})
+
+# print(response.status_code)
+# print(json.loads(response.text))
