@@ -29,7 +29,9 @@ cursor = tweepy.Cursor(
     monitor_rate_limit=True,
     wait_on_rate_limit=True,
     lang="en",
-    until=today
+    until=today,
+    include_entities=True,
+    tweet_mode='extended'
 )
 
 bulk = ""
@@ -40,7 +42,7 @@ for tweet in cursor.items():
     data = tweet._json
     data = data["retweeted_status"] if "retweeted_status" in data else data
     dataline = {
-        'text': data['text'],
+        'text': data['full_text'],
         'entities': data['entities'],
         'user': data['user']
     }
