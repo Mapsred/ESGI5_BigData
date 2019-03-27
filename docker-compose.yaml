@@ -23,3 +23,15 @@ services:
     depends_on:
       - elasticsearch
       - kibana
+
+  node:
+    image: 'node:latest'
+    working_dir: /home/node/app
+    command:
+    - /bin/sh
+    - '-c'
+    - 'npm install && npm start & npm run watch-css'
+    ports:
+    - '3000:3000'
+    volumes:
+    - './app:/home/node/app'
