@@ -1,3 +1,4 @@
 /.idea
 /elasticdata/*
 !/elasticdata/.gitignore
+/docker-compose.override.yml
