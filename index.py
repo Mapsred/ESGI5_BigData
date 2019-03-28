@@ -28,6 +28,7 @@ cursor = tweepy.Cursor(
     result_type='recent',
     monitor_rate_limit=True,
     wait_on_rate_limit=True,
+    wait_on_rate_limit_notify=True,
     lang="en",
     until=today,
     include_entities=True,
