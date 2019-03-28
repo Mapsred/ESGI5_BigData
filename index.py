@@ -68,6 +68,10 @@ requests.put("http://elasticsearch:9200/tweets/_mapping/_doc", json={
         "text": {
             "type": "text",
             "fielddata": True
+        },
+        "user.location": {
+            "type": "text",
+            "fielddata": True
         }
     }
 })
