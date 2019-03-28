@@ -2,6 +2,11 @@
 
 h1 {
   color: $fifth-color;
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
 }
 
 body {
@@ -50,6 +55,11 @@ nav {
       }
     }
   }
+}
+
+.card {
+  border-top: 1px solid $fifth-color;
+  color: $fifth-color;
 }
 
 section {

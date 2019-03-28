@@ -6,16 +6,24 @@ router.get('/patch', (req, res) => {
 
     const query = {
         "query": {
-            "match": {
-                "text": "economy"
+            "multi_match": {
+                "query": "8.2 changes coming",
+                "fuzziness": "AUTO",
+                "fields": ["text", "text.stemmed"]
             }
         }
     };
+
     search(query).then(function(result){
+        const hit = result.hits.hits[0];
+        let topTweet = {};
+        if(typeof hit !== 'undefined') {
+            topTweet.user = hit['_source']['user']['name'];
+            topTweet.text = hit['_source']['text'];
+        }
 
-
+        res.render('layout', { section: 'Patch', topTweet: topTweet });
     });
-    res.render('layout', { section: 'Patch'});
 });
 
 module.exports = router;

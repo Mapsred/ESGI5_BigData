@@ -1,5 +1,10 @@
 h1 {
   color: #202052;
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
 }
 
 body {
@@ -47,6 +52,11 @@ nav .links ul a:hover {
 }
 nav .links ul a:active {
   color: #c6cbef;
+}
+
+.card {
+  border-top: 1px solid #202052;
+  color: #202052;
 }
 
 section {
