@@ -62,5 +62,15 @@ response = requests.post("http://elasticsearch:9200/tweets/_doc/_bulk", data=bul
     'Content-Type': 'application/json',
 })
 
+# Enable fielddata: true on the text field to enable usage of aggregate query
+requests.put("http://elasticsearch:9200/tweets/_mapping/_doc", json={
+    "properties": {
+        "text": {
+            "type": "text",
+            "fielddata": True
+        }
+    }
+})
+
 # print(response.status_code)
 # print(json.loads(response.text))
