@@ -4,6 +4,7 @@ block content
     div(class="graphContainer")
         div(class="graphCell")
             canvas(id='myChart' width='400' height='400')
+        canvas(id='myChart3' width='400' height='400')
     script.
         document.addEventListener("DOMContentLoaded", function (event) {
             var ctx = document.getElementById('myChart');
@@ -15,15 +16,32 @@ block content
                         backgroundColor: !{backgroundColors},
                         label: 'My dataset' // for legend
                     }],
-                    labels: !{areas}
+                    labels: !{charts[1]['areas']}
                 },
                 type: 'pie',
                 options: {
                     responsive: true,
                     title: {
                         display: true,
-                        text: '!{optionTitle}'
+                        text: 'Tag Repartition'
                     }
                 }
             });
+
+            var ctx3 = document.getElementById('myChart3');
+
+            new Chart(ctx3, {
+                data: {
+                    datasets: !{charts[2]['datasets']}
+                },
+                type: 'bar',
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Word Repartition'
+                    }
+                }
+            });
+
         });
