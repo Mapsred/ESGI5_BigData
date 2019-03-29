@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const search = require("../libs/EsQueryBuilder");
+const tagChartManager = require("../libs/tagChartManager");
 
 router.get('/patch', (req, res) => {
 
@@ -15,14 +16,11 @@ router.get('/patch', (req, res) => {
     };
 
     search(query).then(function(result){
-        const hit = result.hits.hits[0];
-        let topTweet = {};
-        if(typeof hit !== 'undefined') {
-            topTweet.user = hit['_source']['user']['name'];
-            topTweet.text = hit['_source']['text'];
-        }
+        const hits = result.hits.hits;
+        let content = tagChartManager(hits);
+        content.section = 'Patch';
 
-        res.render('layout', { section: 'Patch', topTweet: topTweet });
+        res.render('layout', content);
     });
 });
 

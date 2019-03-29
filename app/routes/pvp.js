@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const search = require("../libs/EsQueryBuilder");
+const tagChartManager = require("../libs/tagChartManager");
 
 router.get('/pvp', (req, res) => {
     const query = {
@@ -13,15 +14,12 @@ router.get('/pvp', (req, res) => {
         }
     };
 
-    search(query).then(function(result){
-        const hit = result.hits.hits[0];
-        let topTweet = {};
-        if(typeof hit !== 'undefined') {
-            topTweet.user = hit['_source']['user']['name'];
-            topTweet.text = hit['_source']['text'];
-        }
+    search(query).then(function (result) {
+        const hits = result.hits.hits;
+        let content = tagChartManager(hits);
+        content.section = 'PvP';
 
-        res.render('layout', { section: 'PvP', topTweet: topTweet });
+        res.render('layout', content);
     });
 
 });
