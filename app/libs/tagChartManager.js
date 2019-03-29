@@ -7,6 +7,7 @@ const tagChartManager = function (hits) {
     if (typeof hit !== 'undefined') {
         topTweet.user = hit['_source']['user']['name'];
         topTweet.text = hit['_source']['text'];
+        topTweet.link = "https://twitter.com/i/web/status/" + hit['_id'];
     }
 
     let area = {
