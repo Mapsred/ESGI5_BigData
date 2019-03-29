@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const search = require("../libs/EsQueryBuilder");
+const dynamicColors = require("../libs/colorLib");
 
 router.get('/', (req, res) => {
     const query = {
@@ -22,12 +23,18 @@ router.get('/', (req, res) => {
         const areas = extractColumn(areaRepartition, 'key'),
             repartitions = extractColumn(areaRepartition, 'doc_count');
 
-        // let colors = [];
-        // for(let i in areaRepartition) {
-        //     colors.
-        // }
 
-        res.render('home', { section: 'Home', areas: JSON.stringify(areas), repartitions: JSON.stringify(repartitions) });
+        let backgroundColors = [];
+        for(let i in areaRepartition) {
+            backgroundColors.push(dynamicColors())
+        }
+
+        res.render('home', {
+            section: 'Home',
+            areas: JSON.stringify(areas),
+            repartitions: JSON.stringify(repartitions),
+            backgroundColors: JSON.stringify(backgroundColors)
+        });
     });
 });
 
