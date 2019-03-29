@@ -18,6 +18,7 @@ router.get('/pvp', (req, res) => {
         const hits = result.hits.hits;
         let content = tagChartManager(hits);
         content.section = 'PvP';
+        content.optionTitle = 'PvP Repartition';
 
         res.render('layout', content);
     });

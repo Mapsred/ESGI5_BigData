@@ -1,5 +1,6 @@
 const express = require('express');
 const homeRouter = require('./../routes/home');
+const areaRouter = require('./../routes/area');
 const pvpRouter = require('./../routes/pvp');
 const pveRouter = require('./../routes/pve');
 const economyRouter = require('./../routes/economy');
@@ -13,6 +14,7 @@ app.set('view engine', 'pug');
 app.use(express.static('./public'));
 
 app.use('/', homeRouter);
+app.use('/', areaRouter);
 app.use('/', pvpRouter);
 app.use('/', pveRouter);
 app.use('/', economyRouter);

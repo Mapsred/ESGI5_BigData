@@ -19,6 +19,7 @@ router.get('/pve', (req, res) => {
         const hits = result.hits.hits;
         let content = tagChartManager(hits);
         content.section = 'PvE';
+        content.optionTitle = 'PvE Repartition';
 
         res.render('layout', content);
     });

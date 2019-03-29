@@ -4,7 +4,6 @@ block content
     div(class="graphContainer")
         div(class="graphCell")
             canvas(id='myChart' width='400' height='400')
-            canvas(id='myChart2' width='400' height='400')
     script.
         document.addEventListener("DOMContentLoaded", function (event) {
             var ctx = document.getElementById('myChart');
@@ -12,41 +11,19 @@ block content
             new Chart(ctx, {
                 data: {
                     datasets: [{
-                        data: !{charts[0]['repartitions']},
-                        backgroundColor: !{charts[0]['backgroundColors']},
+                        data: !{repartitions},
+                        backgroundColor: !{backgroundColors},
                         label: 'My dataset' // for legend
                     }],
-                    labels: !{charts[0]['areas']}
+                    labels: !{areas}
                 },
                 type: 'pie',
                 options: {
                     responsive: true,
                     title: {
                         display: true,
-                        text: 'Tweet Area Repartition'
+                        text: '!{optionTitle}'
                     }
                 }
             });
-
-            var ctx2 = document.getElementById('myChart2');
-
-            new Chart(ctx2, {
-                data: {
-                    datasets: [{
-                        data: !{charts[1]['repartitions']},
-                        backgroundColor: !{charts[1]['backgroundColors']},
-                        label: 'My dataset' // for legend
-                    }],
-                    labels: !{charts[1]['areas']}
-                },
-                type: 'pie',
-                options: {
-                    responsive: true,
-                    title: {
-                        display: true,
-                        text: 'Tag Repartition'
-                    }
-                }
-            });
-
         });

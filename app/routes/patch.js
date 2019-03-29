@@ -19,6 +19,7 @@ router.get('/patch', (req, res) => {
         const hits = result.hits.hits;
         let content = tagChartManager(hits);
         content.section = 'Patch';
+        content.optionTitle = 'Patch Repartition';
 
         res.render('layout', content);
     });

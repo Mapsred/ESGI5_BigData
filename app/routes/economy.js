@@ -19,6 +19,7 @@ router.get('/economy', (req, res) => {
         const hits = result.hits.hits;
         let content = tagChartManager(hits);
         content.section = 'Economy';
+        content.optionTitle = 'Economy Repartition';
 
         res.render('layout', content);
     });

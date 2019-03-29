@@ -19,6 +19,7 @@ router.get('/race', (req, res) => {
         const hits = result.hits.hits;
         let content = tagChartManager(hits);
         content.section = 'Race';
+        content.optionTitle = 'Race Repartition';
 
         res.render('layout', content);
     });

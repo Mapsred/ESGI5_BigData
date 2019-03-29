@@ -26,7 +26,8 @@ const tagChartManager = function (hits) {
     }
 
     return {
-        section: 'PvP',
+        optionTitle: '',
+        section: '',
         topTweet: topTweet,
         areas: JSON.stringify(area.areas),
         repartitions: JSON.stringify(area.repartitions),
