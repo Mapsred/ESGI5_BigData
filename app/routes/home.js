@@ -20,8 +20,8 @@ router.get('/', (req, res) => {
     search(query).then(function (result) {
         const areaRepartition = result.aggregations.tagcloud.buckets;
 
-        const areas = extractColumn(areaRepartition, 'key'),
-            repartitions = extractColumn(areaRepartition, 'doc_count');
+        const areas = extractColumn(areaRepartition, 'key', true),
+            repartitions = extractColumn(areaRepartition, 'doc_count', true);
 
         let backgroundColors = [];
         for (let i in areaRepartition) {
@@ -60,20 +60,52 @@ router.get('/', (req, res) => {
                 }
             };
 
-            search(query).then(function (result) {
+            search(query).then((result) => {
+                console.log('TAG : ', tag);
                 tagChart.areas.push(tag);
                 tagChart.repartitions.push(result['hits']['total']);
                 tagChart.backgroundColors.push(dynamicColors());
 
                 let lastKeys = Object.keys(tags)[Object.keys(tags).length - 1];
                 if (tag === lastKeys) {
-                    res.render('home', {
-                        'charts': [areaChart, {
-                            section: 'Tags',
-                            areas: JSON.stringify(tagChart.areas),
-                            repartitions: JSON.stringify(tagChart.repartitions),
-                            backgroundColors: JSON.stringify(tagChart.backgroundColors)
-                        }]
+                    tagChart = {
+                        section: 'Tags',
+                        areas: JSON.stringify(tagChart.areas),
+                        repartitions: JSON.stringify(tagChart.repartitions),
+                        backgroundColors: JSON.stringify(tagChart.backgroundColors)
+                    };
+
+                    let topWordQuery = {
+                        "size": 0,
+                        "aggregations": {
+                            "my_agg": {
+                                "terms": {
+                                    "field": "text",
+                                    "size": 50,
+                                    "exclude": ["the", "to", "a", "and", "for", "you", "in", "of", "is", "be", "are", "we", "any", "it", "will", "with", "on", "have", "there", "can", "that", "or", "more", "like", "when", "get", "plans", "this", "what", "i", "as", "some", "so", "not", "do", "why", "from", "https", "t.co", "would", "at", "game", "new", "but", "make", "was", "an", "they", "see", "back", "if", "them", "about", "all", "going", "how", "just", "could", "been", "other", "has", "one", "no", "also", "ever", "my", "please", "their", "us", "up", "feel", "now", "add", "than", "being", "many", "watcherdev", "every", "amp", "it's", "use", "after", "again", "current", "having", "want", "give", "much", "even", "people"]
+                                }
+                            }
+                        }
+                    };
+                    search(topWordQuery).then(function (wordResult) {
+                        const wordsRepartition = wordResult['aggregations']['my_agg']['buckets'];
+
+                        let datasets = [];
+                        for (let i in wordsRepartition) {
+                            datasets.push({
+                                label: wordsRepartition[i]['key'],
+                                backgroundColor: dynamicColors(),
+                                data: [
+                                    wordsRepartition[i]['doc_count']
+                                ]
+                            });
+                        }
+                        let wordsRepartitionChart = {};
+                        wordsRepartitionChart.datasets = JSON.stringify(datasets);
+
+                        res.render('home', {
+                            'charts': [areaChart, tagChart, wordsRepartitionChart]
+                        });
                     });
                 }
             });
@@ -83,9 +115,9 @@ router.get('/', (req, res) => {
     });
 });
 
-function extractColumn(arr, column) {
+function extractColumn(arr, column, noArea = false) {
     return arr.map(x => {
-        if (typeof x[column] === "string" && x[column].length === 0) {
+        if (noArea && typeof x[column] === "string" && x[column].length === 0) {
             return 'No area'
         }
         return x[column];
