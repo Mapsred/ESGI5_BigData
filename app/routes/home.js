@@ -19,6 +19,7 @@ router.get('/', (req, res) => {
         backgroundColors: []
     };
 
+    let promises = [];
     for (let tag in tags) {
         let keywords = tags[tag];
         const query = {
@@ -30,25 +31,27 @@ router.get('/', (req, res) => {
             }
         };
 
-        search(query).then(function (result) {
-            tagChart.areas.push(tag);
-            tagChart.repartitions.push(result['hits']['total']);
-            tagChart.backgroundColors.push(dynamicColors());
-
-            let lastKeys = Object.keys(tags)[Object.keys(tags).length - 1];
-            if (tag === lastKeys) {
-                res.render('home', {
-                    optionTitle: 'Tag Repartition',
-                    section: 'Tags',
-                    areas: JSON.stringify(tagChart.areas),
-                    repartitions: JSON.stringify(tagChart.repartitions),
-                    backgroundColors: JSON.stringify(tagChart.backgroundColors)
-
-                });
-            }
-        });
-
+        let promise = search(query);
+        promises.push(promise);
     }
+
+    Promise.all(promises).then(function (result) {
+        const tagKeys = Object.keys(tags);
+        for (let i in result) {
+            const tag = tagKeys[i];
+            tagChart.areas.push(tag);
+            tagChart.repartitions.push(result[i]['hits']['total']);
+            tagChart.backgroundColors.push(dynamicColors());
+        }
+
+        res.render('home', {
+            optionTitle: 'Tag Repartition',
+            section: 'Tags',
+            areas: JSON.stringify(tagChart.areas),
+            repartitions: JSON.stringify(tagChart.repartitions),
+            backgroundColors: JSON.stringify(tagChart.backgroundColors)
+        });
+    });
 
 });
 
