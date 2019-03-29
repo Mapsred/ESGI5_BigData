@@ -6,6 +6,7 @@ const pveRouter = require('./../routes/pve');
 const economyRouter = require('./../routes/economy');
 const raceRouter = require('./../routes/race');
 const patchRouter = require('./../routes/patch');
+const wordsRouter = require('./../routes/words');
 
 const app = express();
 
@@ -20,5 +21,6 @@ app.use('/', pveRouter);
 app.use('/', economyRouter);
 app.use('/', raceRouter);
 app.use('/', patchRouter);
+app.use('/', wordsRouter);
 
 app.listen(3000, () => console.log('Listening on port 3000'));

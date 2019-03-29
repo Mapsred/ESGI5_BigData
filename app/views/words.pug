@@ -5,23 +5,18 @@ block content
         canvas(id='myChart' width='400' height='400')
     script.
         document.addEventListener("DOMContentLoaded", function (event) {
-            var ctx = document.getElementById('myChart');
+            var ctx3 = document.getElementById('myChart');
 
-            new Chart(ctx, {
+            new Chart(ctx3, {
                 data: {
-                    datasets: [{
-                        data: !{repartitions},
-                        backgroundColor: !{backgroundColors},
-                        label: 'My dataset' // for legend
-                    }],
-                    labels: !{areas}
+                    datasets: !{charts[0]['datasets']}
                 },
-                type: 'pie',
+                type: 'bar',
                 options: {
                     responsive: true,
                     title: {
                         display: true,
-                        text: 'Tag Repartition'
+                        text: 'Word Repartition'
                     }
                 }
             });
