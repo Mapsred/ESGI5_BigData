@@ -23,7 +23,6 @@ router.get('/', (req, res) => {
         const areas = extractColumn(areaRepartition, 'key'),
             repartitions = extractColumn(areaRepartition, 'doc_count');
 
-
         let backgroundColors = [];
         for(let i in areaRepartition) {
             backgroundColors.push(dynamicColors())

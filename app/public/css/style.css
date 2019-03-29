@@ -63,4 +63,13 @@ section {
   padding: 0 25%;
 }
 
+.graphContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.graphCell {
+  width: 50%;
+}
+
 /*# sourceMappingURL=style.css.map */
