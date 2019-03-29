@@ -67,15 +67,13 @@ router.get('/', (req, res) => {
 
                 let lastKeys = Object.keys(tags)[Object.keys(tags).length - 1];
                 if (tag === lastKeys) {
-                    tagChart = {
-                        section: 'Tags',
-                        areas: JSON.stringify(tagChart.areas),
-                        repartitions: JSON.stringify(tagChart.repartitions),
-                        backgroundColors: JSON.stringify(tagChart.backgroundColors)
-                    };
-
                     res.render('home', {
-                        'charts': [areaChart, tagChart]
+                        'charts': [areaChart, {
+                            section: 'Tags',
+                            areas: JSON.stringify(tagChart.areas),
+                            repartitions: JSON.stringify(tagChart.repartitions),
+                            backgroundColors: JSON.stringify(tagChart.backgroundColors)
+                        }]
                     });
                 }
             });
