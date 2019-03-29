@@ -6,8 +6,28 @@ block content
             h2 Most pertinent Tweet
             p #[strong User : ] #{topTweet.user}
             p #[strong Question : ] #{topTweet.text}
+            p #[strong Link : ] #[a(href="#{topTweet.link}") #{topTweet.link}]
     canvas(id='myChart' width='400' height='400')
     script.
-        document.addEventListener("DOMContentLoaded", function(event) {
-            console.log('script here')
+        document.addEventListener("DOMContentLoaded", function (event) {
+            var ctx = document.getElementById('myChart');
+
+            new Chart(ctx, {
+                data: {
+                    datasets: [{
+                        data: !{repartitions},
+                        backgroundColor: !{backgroundColors},
+                        label: 'My dataset' // for legend
+                    }],
+                    labels: !{areas}
+                },
+                type: 'pie',
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'PVE Repartition'
+                    }
+                }
+            });
         });
