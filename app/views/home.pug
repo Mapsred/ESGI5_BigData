@@ -1,0 +1,26 @@
+extends blocks/main.pug
+
+block content
+    canvas(id='myChart' width='400' height='400')
+    script.
+        document.addEventListener("DOMContentLoaded", function (event) {
+            var ctx = document.getElementById('myChart');
+            // var chartColors = window.chartColors;
+            // var color = Chart.helpers.color;
+
+            new Chart(ctx, {
+                data: {
+                    datasets: [{
+                        data: !{repartitions},
+                        // backgroundColor: [
+                        //     'blue',
+                        //     'red',
+                        //     'green'
+                        // ],
+                        label: 'My dataset' // for legend
+                    }],
+                    labels: !{areas}
+                },
+                type: 'pie'
+            });
+        });

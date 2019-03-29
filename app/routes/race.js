@@ -22,7 +22,7 @@ router.get('/race', (req, res) => {
             topTweet.text = hit['_source']['text'];
         }
 
-        res.render('layout', { section: 'PvP', topTweet: topTweet });
+        res.render('layout', { section: 'Race', topTweet: topTweet });
     });
 });
 
